@@ -35,8 +35,16 @@ def getstudents():
 
 #now from student id not from index
 @app.get("/students/id/{id}")
-def getstudentid(id:int):
+def getbystudentid(id:int):
     for st in students:
         if st["id"] == id:
             return st
+    raise HTTPException(status_code=404, detail="Student not found")
+
+@app.get("/students/name/{name}")
+def getstudentid(name:str):
+    for st in students:
+        if st["name"] == name:
+            return st
+    # return None
     raise HTTPException(status_code=404, detail="Student not found")
